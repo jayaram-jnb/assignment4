@@ -1,7 +1,7 @@
 pipeline {
     agent any
         environment {
-        mvnHome = tool 'Maven'
+        mvnHome = tool 'maven'
         tomcatUser = 'ec2-user'
         tomcatHost = '13.233.56.73'
         tomcatPath = '/opt/tomcat/apache-tomcat-9.0.68/webapps/'

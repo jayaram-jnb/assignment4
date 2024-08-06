@@ -21,7 +21,7 @@ pipeline {
                     }
       stage('Deploy') {
                       steps {
-                      sh 'scp target/works-with-heroku-1.0.war ec2-user@18.60.101.31:/opt/tomcat/webapps/'
+                      sh 'scp target/works-with-heroku-1.0.war ec2-user@13.233.56.73:/opt/tomcat/webapps/'
                             }
                     }
             }

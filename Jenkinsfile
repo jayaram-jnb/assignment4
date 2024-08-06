@@ -3,7 +3,7 @@ pipeline {
         stages {
         stage('Checkout') {
                           steps {
-                          git branch: 'main', url: 'https://github.com/jayaram-jnb/Assignment6Jenkins.git'
+                          git branch: 'main', url: 'https://github.com/jayaram-jnb/java-example-maven.git'
                               }
                         }
         stage('Test') {

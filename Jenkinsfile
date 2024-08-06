@@ -6,7 +6,7 @@ pipeline {
         stages {
         stage('Checkout') {
                           steps {
-                          git branch: 'main', url: 'https://github.com/jayaram-jnb/java-example-maven.git'
+                          git branch: 'main', url: 'https://github.com/jayaram-jnb/HelloWorld.git'
                               }
                         }
         stage('Test') {

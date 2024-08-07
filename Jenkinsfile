@@ -1,31 +1,23 @@
 pipeline {
     agent any
-        environment {
-        mvnHome = tool 'maven'
-        tomcatUser = 'ec2-user'
-        tomcatHost = '13.201.168.125'
-        tomcatPath = '/opt/tomcat/webapps/'
+    tools {
+        maven "maven"
     }
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout source code from Git
-                git branch: 'main', url: 'https://github.com/jayaram-jnb/java-example-maven.git'
-            }
-        }
         stage('Build') {
             steps {
-                // Run Maven build
-                sh "'${mvnHome}/bin/mvn' clean package"
-                // Archive the build artifacts
-                archiveArtifacts artifacts: '*/target/.war'
+                git branch: 'main', url: 'https://github.com/jayaram-jnb/java-example-maven.git'
+                sh 'mvn clean package'
             }
         }
         stage('Deploy') {
             steps {
-                // Deploy the artifact using rsync and ssh
                 sshagent(['ssh']) {
-                    sh "rsync -avz -e 'ssh -o StrictHostKeyChecking=no' --delete target/*.war ${tomcatUser}@${tomcatHost}:${tomcatPath}"
+                    sh '''
+                        sudo rsync -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" \
+                        -avz --progress --rsync-path=/usr/bin/rsync target/works-with-heroku-1.0.war \
+                        ec2-user@13.201.168.125:/opt/tomcat/webapps/
+                    '''
                 }
             }
         }

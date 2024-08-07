@@ -2,10 +2,7 @@ pipeline {
     agent any
         environment {
         mvnHome = tool 'maven'
-        tomcatUser = 'ec2-user'
-        tomcatHost = '13.201.168.125'
-        tomcatPath = '/opt/tomcat/webapps/'
-    }
+            }
     stages {
         stage('Checkout') {
             steps {
@@ -25,7 +22,9 @@ pipeline {
             steps {
                 // Deploy the artifact using rsync and ssh
                 sshagent(['ssh']) {
-                    sh "rsync -avz -e 'ssh -o StrictHostKeyChecking=no' --delete target/*.war ${tomcatUser}@${tomcatHost}:${tomcatPath}"
+                    rsync -avz -e 'ssh -o StrictHostKeyChecking=no' --delete target/works-with-heroku-1.0.war ec2-user@13.201.168.125:/opt/tomcat/webapps/
+ssh ec2-user@13.201.168.125 'sudo mv /opt/tomcat/webapps/works-with-heroku-1.0.war /opt/tomcat/webapps/works-with-heroku-1.0.war'
+
                 }
             }
         }

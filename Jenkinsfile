@@ -3,7 +3,7 @@ pipeline {
         environment {
         mvnHome = tool 'maven'
         tomcatUser = 'ec2-user'
-        tomcatHost = '13.233.56.73'
+        tomcatHost = '13.201.168.125'
         tomcatPath = '/opt/tomcat/apache-tomcat-9.0.68/webapps/'
     }
     stages {

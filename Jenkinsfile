@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/jayaram-jnb/HelloWorld.git'
+                git branch: 'main', url: 'https://github.com/jayaram-jnb/java-example-maven.git'
                 sh 'mvn clean package'
             }
         }
